@@ -7,6 +7,7 @@ const {
   registerUser,
   dashboard,
   loginUser,
+  isAuthenticated,
 } = require("../controller/authControlller");
 
 routes.get("/", login);
@@ -17,6 +18,6 @@ routes.post(
   passport.authenticate("local", { failureRedirect: "/register" }),
   loginUser
 );
-routes.get("/dashboard", dashboard);
+routes.get("/dashboard", isAuthenticated, dashboard);
 
 module.exports = routes;

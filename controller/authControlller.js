@@ -1,5 +1,12 @@
 const userModel = require("../model/userModel");
 
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect("/");
+};
+
 const login = (req, res) => {
   if (res.locals.users) {
     return res.redirect("pages/dashboard");
@@ -49,4 +56,5 @@ module.exports = {
   registerUser,
   loginUser,
   dashboard,
+  isAuthenticated,
 };
